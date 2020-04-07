@@ -120,6 +120,8 @@ class Van {
    */
   void UnpackMeta(const char *meta_buf, int buf_size, Meta *meta);
 
+  bool IsValidPushpull(const Message &msg);
+
   Node scheduler_;
   Node my_node_;
   bool is_scheduler_;

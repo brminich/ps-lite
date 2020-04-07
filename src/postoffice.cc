@@ -16,9 +16,13 @@ Postoffice::Postoffice() {
 void Postoffice::InitEnvironment() {
   const char* val = NULL;
   int enable_rdma = GetEnv("DMLC_ENABLE_RDMA", 0);
+  int enable_ucx  = GetEnv("DMLC_ENABLE_UCX", 0);
   if (enable_rdma) {
     LOG(INFO) << "enable RDMA for networking";
     van_ = Van::Create("rdma");
+  } else if (enable_ucx) {
+    LOG(INFO) << "enable UCX for networking";
+    van_ = Van::Create("ucx");
   } else {
     van_ = Van::Create("zmq");
   }
